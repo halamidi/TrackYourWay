@@ -5,5 +5,4 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="randomcompany.trackyourway.MapsActivity"
-    tools:layout="@layout/abc_action_menu_item_layout" />
+    tools:context="randomcompany.trackyourway.MapsActivity" />

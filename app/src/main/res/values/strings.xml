@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">TrackYourWay</string>
     <string name="title_activity_maps">Map</string>
+    <string name="mapBtn">straight to maps (just a test btn)</string>
+    <string name="searchBtn">Search for course</string>
+    <string name="loginBtn">Login</string>
+    <string name="registerBtn">Register new account</string>
+    <string name="textView">Dont have an account yet? click register to create one</string>
+    <string name="nameTv">Username</string>
+    <string name="Passwordtv">Password</string>
 </resources>

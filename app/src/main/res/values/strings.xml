@@ -8,4 +8,5 @@
     <string name="textView">Dont have an account yet? click register to create one</string>
     <string name="nameTv">Username</string>
     <string name="Passwordtv">Password</string>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="randomcompany.trackyourway.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:background="#820bf1">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/wel"
+        android:id="@+id/textView2"
+        android:layout_marginTop="124dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColorHighlight="#ff3e03"
+        android:textColorHint="#ff6301"
+        android:textColorLink="#ff8800"
+        android:textColor="#ff5500"
+        android:textStyle="bold|italic"
+        android:textSize="40sp"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TrackYourWay"
+        android:id="@+id/textView3"
+        android:textAlignment="center"
+        android:textColorHighlight="#ff3e03"
+        android:textColorHint="#ff6301"
+        android:textColorLink="#ff8800"
+        android:textColor="#ff5500"
+        android:textStyle="bold|italic"
+        android:textSize="40sp"
+        android:textIsSelectable="false"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+</RelativeLayout>

@@ -15,24 +15,24 @@ public class LocalUserDetails {
     }
 
     public void storeDetails(UserAccount newUser){
-        SharedPreferences.Editor editor = userDetails.edit();
-        editor.putString("username",newUser.userName);
+        SharedPreferences.Editor SPEditor = userDetails.edit();
+        SPEditor.putString("username",newUser.UserName);
         //saving password makes no sense but its here incase it ends up being needed
         //editor.putString("password", newUser.password);
-        editor.commit();
+        SPEditor.commit();
     }
 
     public UserAccount getDetails(){
-        String username = userDetails.getString("username", "");
+        String userName = userDetails.getString("username", "");
         String password = userDetails.getString("password","");
-        UserAccount newUser = new UserAccount(username, password);
+        UserAccount newUser = new UserAccount(userName, password);
         return newUser;
     }
 
-    public void isLoggedIn(boolean loggedIn){
-        SharedPreferences.Editor editor = userDetails.edit();
-        editor.putBoolean("isLoggedIn", loggedIn);
-        editor.commit();
+    public void setIsLoggedIn(boolean loggedIn){
+        SharedPreferences.Editor SPEditor = userDetails.edit();
+        SPEditor.putBoolean("isLoggedIn", loggedIn);
+        SPEditor.commit();
     }
 
     public boolean checkLoggedInstatus(){
@@ -44,9 +44,9 @@ public class LocalUserDetails {
     }
     //clear data when user logs out
     public void removedetails(){
-        SharedPreferences.Editor editor = userDetails.edit();
-        editor.clear();
-        editor.commit();
+        SharedPreferences.Editor SPEditor = userDetails.edit();
+        SPEditor.clear();
+        SPEditor.commit();
 
     }
 

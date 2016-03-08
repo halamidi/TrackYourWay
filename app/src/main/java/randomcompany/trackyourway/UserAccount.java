@@ -5,19 +5,19 @@ package randomcompany.trackyourway;
  */
 public class UserAccount {
     //this is a test user more data will need to be added when userlogin is fully functional
-    String userName, password;
+    String UserName, Password;
     //password will be removed from here and will be using set password instead at a later date
     //this is so when writing user details on phone the password dose not print out
     public UserAccount(String newName, String newPassword){
-        userName = newName;
-        password = newPassword;
+        UserName = newName;
+        Password = newPassword;
 
     }
 
-    public String getName(){
-        return userName;
+    public String getUserName(){
+        return UserName;
     }
     public String getPassword(){
-        return password;
+        return Password;
     }
 }

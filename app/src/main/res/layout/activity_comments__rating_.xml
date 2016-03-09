@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="randomcompany.trackyourway.Comments_Rating_Activity">
 
     <TextView
@@ -16,7 +17,9 @@
         android:text="Rating"
         android:id="@+id/textView20"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#fdfefd"
+        />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -34,15 +37,18 @@
         android:id="@+id/textView21"
         android:layout_below="@+id/ratingBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="36dp"
+        android:textColor="#ffffff"
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="440dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -50,14 +56,17 @@
         android:id="@+id/editText"
         android:layout_below="@+id/textView21"
         android:layout_alignStart="@+id/ratingBar"
-        android:layout_alignEnd="@+id/ratingBar" />
+        android:layout_alignEnd="@+id/ratingBar"
 
-    <ExpandableListView
+        />
+
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/expandableListView"
+        android:id="@+id/ratingListView"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/button3" />
+        android:layout_marginBottom="40dp"
+        android:background="#ffffff" />
 
 </RelativeLayout>

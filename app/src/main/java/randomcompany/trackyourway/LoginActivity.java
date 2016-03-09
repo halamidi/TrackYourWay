@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.loginBtn:
-                if (userName.getText().toString().equals("") || userName.getText().toString().equals(null)) {
+                if (userName.getText().toString().equals("") || userName.getText().toString() == null) {
                     Warninglbl.setText("please enter your username");
-                }else if(password.getText().toString().equals("") || password.getText().toString().equals(null)){
+                }else if(password.getText().toString().equals("") || password.getText().toString() == null){
                     Warninglbl.setText("please enter your Password");
                 }else{
                     String lUserName = userName.getText().toString();

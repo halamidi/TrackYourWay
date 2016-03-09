@@ -57,9 +57,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/h2"
-        android:id="@+id/textView9"
+        android:id="@+id/Warninglbl"
         android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/Nametxt"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -189,7 +191,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/UserNametxt"
             android:layout_below="@+id/intereststxt"
-            android:layout_alignStart="@+id/textView9"
+            android:layout_alignStart="@+id/Warninglbl"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="33dp"
             android:inputType="text" />
@@ -211,6 +213,7 @@
             android:id="@+id/registerdetailsbtn"
             android:layout_below="@+id/Passwordtxt"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:onClick="onClick" />
     </RelativeLayout>
 </ScrollView>

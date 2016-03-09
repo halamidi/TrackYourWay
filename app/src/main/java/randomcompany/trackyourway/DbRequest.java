@@ -29,7 +29,7 @@ public class DbRequest{
     ProgressDialog progress;
     public static final int TimeOut = 1500*15;
     private static final String LoginUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Login.php";
-    private static final String RegistrationUrl = "add registration php url here";
+    private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";
 
     public DbRequest(Context context){
         progress = new ProgressDialog(context);
@@ -42,7 +42,7 @@ public class DbRequest{
 
     public void DbStoreDetails(UserAccount newUser, CallBackInter newCallBack){
         progress.show();
-        //new StoreUserDetails(newUser, newCallBack).execute();
+        new addUserToDB(newUser, newCallBack).execute();
     }
 
     public void DbRetrieveDetails(UserAccount newUser, CallBackInter callBack){
@@ -161,9 +161,9 @@ public class DbRequest{
 
         @Override
         protected Void doInBackground(Void... params) {
-            URL rUrl;
+
             try{
-                rUrl = new URL(RegistrationUrl);
+                URL rUrl = new URL(RegistrationUrl);
                 HttpURLConnection DBConnection = (HttpURLConnection) rUrl.openConnection();
                 DBConnection.setReadTimeout(TimeOut);
                 DBConnection.setConnectTimeout(TimeOut);
@@ -174,6 +174,21 @@ public class DbRequest{
                 Uri.Builder UBuilder = new Uri.Builder();
                 UBuilder.appendQueryParameter("UserName", user.UserName);
                 UBuilder.appendQueryParameter("Password", user.Password);
+                UBuilder.appendQueryParameter("Name", user.name);
+                UBuilder.appendQueryParameter("Age", Integer.toString(user.age));
+                UBuilder.appendQueryParameter("Email", user.email);
+                if(user.certificate != null && !(user.certificate.equals(""))){
+                    UBuilder.appendQueryParameter("Certificate", user.certificate);
+                }
+                if(user.prevCollege != null && !(user.prevCollege.equals(""))){
+                    UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
+                }
+                if(user.prevCourse != null && !(user.prevCourse.equals(""))){
+                    UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
+                }
+                if(user.interests != null && !(user.interests.equals(""))){
+                    UBuilder.appendQueryParameter("Interests", user.interests);
+                }
                 String DBquery = UBuilder.build().getEncodedQuery();
                 Log.d("Query", DBquery);
 
@@ -182,13 +197,14 @@ public class DbRequest{
                 BW.write(DBquery);
                 BW.flush();
                 BW.close();
+                oStream.close();
                 int responseCode = DBConnection.getResponseCode();
                 Log.d("code",Integer.toString(responseCode));
                 DBConnection.connect();
-
-
+                Log.d("code", Integer.toString(responseCode));
 
             }catch (Exception e){
+                Log.d(null, "failed");
                 e.printStackTrace();
             }
             return null;

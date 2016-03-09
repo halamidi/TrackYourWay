@@ -59,7 +59,12 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".Results_Activity" />
+        <activity android:name=".MainHub_Activity" />
+        <activity android:name=".Comments_Rating_Activity" />
+        <activity android:name=".College_Info_Activity" />
+        <activity android:name=".Saved_Results_Activity"></activity>
     </application>
 
 </manifest>

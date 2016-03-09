@@ -118,4 +118,5 @@
     <string name="passwordlbl">*Password</string>
     <string name="submitbtn">Submit Details</string>
     <string name="loginbtn">login</string>
+    <string name="title_activity_rating__comments_">Rating_Comments_Activity</string>
 </resources>

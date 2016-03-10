@@ -27,7 +27,7 @@ public class Comments_Rating_Activity extends AppCompatActivity {
     }
 
     private void populateRatingsList() {
-        myRatings.add(new Ratings("Great", R.drawable.stars4));
+        myRatings.add(new Ratings("Brilliant", R.drawable.stars4));
         myRatings.add(new Ratings("NCI is the best all the lecturers are great", R.drawable.stars5));
     }
 

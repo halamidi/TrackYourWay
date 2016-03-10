@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(userLogin != null){
                     details.storeDetails(userLogin);
                     details.setIsLoggedIn(true);
-                    Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                    Intent i = new Intent(getApplicationContext(), MainHub_Activity.class);
                     startActivity(i);
                 }else{
                     Log.d(null,"something has gone wrong");

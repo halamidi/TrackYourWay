@@ -2,7 +2,6 @@ package randomcompany.trackyourway;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,7 +26,7 @@ import java.util.Map;
  */
 public class DbRequest{
     ProgressDialog progress;
-    public static final int TimeOut = 1500*15;
+    public static final int TimeOut = 1500*25;
     private static final String LoginUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Login.php";
     private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";
 
@@ -107,7 +106,7 @@ public class DbRequest{
                 }else{
                     String name = jResponse.getString("UserName");
                     newUser = new UserAccount(name,User.Password);
-                    Log.d("returned user", newUser.UserName);
+                    Log.d("returned user2", newUser.UserName);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -161,7 +160,29 @@ public class DbRequest{
 
         @Override
         protected Void doInBackground(Void... params) {
-
+            HashMap<String,String> DBRegisterDetails = new HashMap<String,String>();
+            Log.d("check name", user.UserName);
+            DBRegisterDetails.put("UserName", user.UserName);
+            DBRegisterDetails.put("Password", user.Password);
+            DBRegisterDetails.put("Name", user.name);
+            DBRegisterDetails.put("Age", Integer.toString(user.age));
+            DBRegisterDetails.put("Email", user.email);
+            if(user.certificate != null && !(user.certificate.equals(""))){
+                //UBuilder.appendQueryParameter("Certificate", user.certificate);
+                DBRegisterDetails.put("Certificate", user.certificate);
+            }
+            if(user.prevCollege != null && !(user.prevCollege.equals(""))){
+                // UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
+                DBRegisterDetails.put("PrevCollege", user.prevCollege);
+            }
+            if(user.prevCourse != null && !(user.prevCourse.equals(""))){
+                // UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
+                DBRegisterDetails.put("PrevCourse", user.prevCourse);
+            }
+            if(user.interests != null && !(user.interests.equals(""))){
+                // UBuilder.appendQueryParameter("Interests", user.interests);
+                DBRegisterDetails.put("Interests", user.interests);
+            }
             try{
                 URL rUrl = new URL(RegistrationUrl);
                 HttpURLConnection DBConnection = (HttpURLConnection) rUrl.openConnection();
@@ -171,38 +192,48 @@ public class DbRequest{
                 DBConnection.setDoInput(true);
                 DBConnection.setDoOutput(true);
 
-                Uri.Builder UBuilder = new Uri.Builder();
-                UBuilder.appendQueryParameter("UserName", user.UserName);
-                UBuilder.appendQueryParameter("Password", user.Password);
-                UBuilder.appendQueryParameter("Name", user.name);
-                UBuilder.appendQueryParameter("Age", Integer.toString(user.age));
-                UBuilder.appendQueryParameter("Email", user.email);
-                if(user.certificate != null && !(user.certificate.equals(""))){
-                    UBuilder.appendQueryParameter("Certificate", user.certificate);
-                }
-                if(user.prevCollege != null && !(user.prevCollege.equals(""))){
-                    UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
-                }
-                if(user.prevCourse != null && !(user.prevCourse.equals(""))){
-                    UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
-                }
-                if(user.interests != null && !(user.interests.equals(""))){
-                    UBuilder.appendQueryParameter("Interests", user.interests);
-                }
-                String DBquery = UBuilder.build().getEncodedQuery();
-                Log.d("Query", DBquery);
+//                Uri.Builder UBuilder = new Uri.Builder();
+//                UBuilder.appendQueryParameter("UserName", user.UserName);
+//                UBuilder.appendQueryParameter("Password", user.Password);
+//                UBuilder.appendQueryParameter("Name", user.name);
+//                UBuilder.appendQueryParameter("Age", Integer.toString(user.age));
+//                UBuilder.appendQueryParameter("Email", user.email);
+//                if(user.certificate != null && !(user.certificate.equals(""))){
+//                    //UBuilder.appendQueryParameter("Certificate", user.certificate);
+//                }
+//                if(user.prevCollege != null && !(user.prevCollege.equals(""))){
+//                   // UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
+//                }
+//                if(user.prevCourse != null && !(user.prevCourse.equals(""))){
+//                   // UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
+//                }
+//                if(user.interests != null && !(user.interests.equals(""))){
+//                   // UBuilder.appendQueryParameter("Interests", user.interests);
+//                }
+               // String DBquery = UBuilder.build().getEncodedQuery();
+                //Log.d("Query", DBquery);
 
                 OutputStream oStream = DBConnection.getOutputStream();
                 BufferedWriter BW = new BufferedWriter(new OutputStreamWriter(oStream,"UTF-8"));
-                BW.write(DBquery);
+                BW.write(getPostData(DBRegisterDetails));
                 BW.flush();
                 BW.close();
                 oStream.close();
                 int responseCode = DBConnection.getResponseCode();
-                Log.d("code",Integer.toString(responseCode));
-                DBConnection.connect();
                 Log.d("code", Integer.toString(responseCode));
-
+                //DBConnection.connect();
+                Log.d("code", Integer.toString(responseCode));
+                //below my not be needed
+                InputStream IS = new BufferedInputStream(DBConnection.getInputStream());
+                BufferedReader ISReader = new BufferedReader(new InputStreamReader(IS));
+                StringBuilder SB = new StringBuilder();
+                String temp = "";
+                while((temp = ISReader.readLine()) != null){
+                    SB.append(temp);
+                }
+                ISReader.close();
+                String response = SB.toString();
+                Log.d("check response", response);
             }catch (Exception e){
                 Log.d(null, "failed");
                 e.printStackTrace();
@@ -210,6 +241,23 @@ public class DbRequest{
             return null;
         }
 
+        private String getPostData(HashMap<String,String> DBRegisterDetails) throws UnsupportedEncodingException{
+            int i = 0;
+            StringBuilder SB = new StringBuilder();
+            for(Map.Entry<String,String> entry : DBRegisterDetails.entrySet()){
+                if(i == 0){
+                    i++;
+                }else{
+                    SB.append("&");
+
+                }
+                SB.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                SB.append("=");
+                SB.append(URLEncoder.encode(entry.getValue(),"UTF-8"));
+
+            }
+            return SB.toString();
+        }
 
     }
 }

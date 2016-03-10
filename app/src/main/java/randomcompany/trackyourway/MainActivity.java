@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         //this is a test if this works remove the if authenticate and others related
         if(details.userDetails.getBoolean("isLoggedIn",false)== true){
             getUserDetails();
-            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+            Intent i = new Intent(getApplicationContext(), MainHub_Activity.class);
             startActivity(i);
         }else{
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);

@@ -13,6 +13,6 @@ public class MainHub_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main_hub_);
     }
 
-    
+
 
 }

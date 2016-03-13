@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fadeScrollbars="false"
-        android:minHeight="1050dp">
+        android:minHeight="1100dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,20 +64,13 @@
         android:text="@string/h2"
         android:id="@+id/Warninglbl"
         android:layout_below="@+id/textView4"
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
 
         android:layout_alignEnd="@+id/Nametxt"
         android:layout_alignParentStart="true"
         android:textAlignment="center" />
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
     <TextView
         android:layout_width="wrap_content"
@@ -194,7 +187,7 @@
             android:id="@+id/textView13"
             android:layout_below="@+id/intereststxt"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="53dp"
             android:textColor="#ffffff" />
 
         <TextView
@@ -205,7 +198,7 @@
             android:id="@+id/textView14"
             android:layout_below="@+id/textView13"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:textColor="#ffffff" />
 
         <EditText
@@ -215,7 +208,7 @@
             android:layout_below="@+id/intereststxt"
             android:layout_alignStart="@+id/Warninglbl"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="83dp"
             android:inputType="text" />
 
         <EditText
@@ -225,7 +218,7 @@
             android:layout_below="@+id/UserNametxt"
             android:layout_alignStart="@+id/UserNametxt"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="63dp"
             android:inputType="textPassword" />
 
         <Button
@@ -233,9 +226,9 @@
             android:layout_height="wrap_content"
             android:text="@string/submitbtn"
             android:id="@+id/registerdetailsbtn"
+            android:onClick="onClick"
             android:layout_below="@+id/Passwordtxt"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:onClick="onClick" />
+            android:layout_marginTop="82dp" />
     </RelativeLayout>
 </ScrollView>

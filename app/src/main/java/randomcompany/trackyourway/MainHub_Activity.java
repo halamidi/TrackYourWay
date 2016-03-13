@@ -12,10 +12,10 @@ public class MainHub_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_hub_);
-        ForumBtn = (ImageButton)findViewById(R.id.ForumBtn);
+        ForumBtn = (ImageButton)findViewById(R.id.forum_btn);
 
 
-<<<<<<< HEAD
+
         ForumBtn.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                                 Intent i = new Intent(getApplicationContext(), Comments_Rating_Activity.class);
@@ -27,7 +27,5 @@ public class MainHub_Activity extends AppCompatActivity {
 
 
 
-=======
 
->>>>>>> origin/master
 }

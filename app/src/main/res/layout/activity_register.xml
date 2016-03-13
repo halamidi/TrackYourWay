@@ -64,14 +64,20 @@
         android:text="@string/h2"
         android:id="@+id/Warninglbl"
         android:layout_below="@+id/textView4"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
 
         android:layout_alignEnd="@+id/Nametxt"
         android:layout_alignParentStart="true"
         android:textAlignment="center" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     <TextView
         android:layout_width="wrap_content"

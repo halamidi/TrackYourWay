@@ -15,6 +15,7 @@ public class MainHub_Activity extends AppCompatActivity {
         ForumBtn = (ImageButton)findViewById(R.id.ForumBtn);
 
 
+<<<<<<< HEAD
         ForumBtn.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                                 Intent i = new Intent(getApplicationContext(), Comments_Rating_Activity.class);
@@ -26,4 +27,7 @@ public class MainHub_Activity extends AppCompatActivity {
 
 
 
+=======
+
+>>>>>>> origin/master
 }

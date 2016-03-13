@@ -57,7 +57,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="10dp"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="110dp"
@@ -80,7 +81,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="10dp"
-        />
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

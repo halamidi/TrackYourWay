@@ -26,9 +26,9 @@ import java.util.Map;
  */
 public class DbRequest{
     ProgressDialog progress;
-    public static final int TimeOut = 1500*25;
-    private static final String LoginUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Login.php";
-    private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";
+    public static final int TimeOut = 1500*155;
+    private static final String LoginUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Login.php"; //"http://10.0.2.2/Login.php"; //this one is for xampp
+    private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";//"http://10.0.2.2/Registration.php"; //this is for xampp
 
     public DbRequest(Context context){
         progress = new ProgressDialog(context);
@@ -167,27 +167,29 @@ public class DbRequest{
             DBRegisterDetails.put("Name", user.name);
             DBRegisterDetails.put("Age", Integer.toString(user.age));
             DBRegisterDetails.put("Email", user.email);
-            if(user.certificate != null && !(user.certificate.equals(""))){
+
+            if(user.certificate != null || !(user.certificate.equals(""))){
                 //UBuilder.appendQueryParameter("Certificate", user.certificate);
                 DBRegisterDetails.put("Certificate", user.certificate);
             }
-            if(user.prevCollege != null && !(user.prevCollege.equals(""))){
+            if(user.prevCollege != null || !(user.prevCollege.equals(""))){
                 // UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
+                Log.d("check prevc", user.prevCollege);
                 DBRegisterDetails.put("PrevCollege", user.prevCollege);
             }
-            if(user.prevCourse != null && !(user.prevCourse.equals(""))){
+            if(user.prevCourse != null || !(user.prevCourse.equals(""))){
                 // UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
                 DBRegisterDetails.put("PrevCourse", user.prevCourse);
             }
-            if(user.interests != null && !(user.interests.equals(""))){
+            if(user.interests != null || !(user.interests.equals(""))){
                 // UBuilder.appendQueryParameter("Interests", user.interests);
                 DBRegisterDetails.put("Interests", user.interests);
             }
             try{
                 URL rUrl = new URL(RegistrationUrl);
                 HttpURLConnection DBConnection = (HttpURLConnection) rUrl.openConnection();
-                DBConnection.setReadTimeout(TimeOut);
                 DBConnection.setConnectTimeout(TimeOut);
+                DBConnection.setReadTimeout(TimeOut);
                 DBConnection.setRequestMethod("POST");
                 DBConnection.setDoInput(true);
                 DBConnection.setDoOutput(true);
@@ -254,7 +256,8 @@ public class DbRequest{
                 SB.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
                 SB.append("=");
                 SB.append(URLEncoder.encode(entry.getValue(),"UTF-8"));
-
+                //just for testing not needed
+                i++;
             }
             return SB.toString();
         }

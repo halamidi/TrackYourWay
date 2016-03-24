@@ -15,6 +15,10 @@ public class UserAccount {
         name = newName;
         age = newAge;
         email = newEmail;
+        certificate  = new String();
+        prevCollege = new String();
+        prevCourse = new String();
+        interests = new String();
     }
     //this is for login
     public UserAccount(String newUserName, String newPassword){

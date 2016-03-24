@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         //make sure required fields are not empty
         if(newName != null && !(newName.equals("")) && newAge != 0 && newEmail != null && !(newEmail.equals("")) && newUsername != null && !(newUsername.equals("")) && newPassword != null && !(newPassword.equals(""))){
             newUser = new UserAccount(newUsername, newPassword, newName, newAge, newEmail);
+
             if(newCertificate != null && !(newCertificate.equals(""))){
                 newUser.setCertificate(newCertificate);
             }

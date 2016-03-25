@@ -70,7 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void UserRegistrationDetails(UserAccount regUser){
         DbRequest reg = new DbRequest(this);
-        reg.DbStoreDetails(regUser, new CallBackInter() {
+        String sType = "AddUser";
+        reg.DBRequestData(sType ,regUser, new CallBackInter() {
             @Override
             public void complete(UserAccount newUser) {
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);

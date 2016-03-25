@@ -41,19 +41,28 @@ public class DbRequest{
 
     public void DbStoreDetails(UserAccount newUser, CallBackInter newCallBack){
         progress.show();
-        new addUserToDB(newUser, newCallBack).execute();
+       // new addUserToDB(newUser, newCallBack).execute();
     }
 
     public void DbRetrieveDetails(UserAccount newUser, CallBackInter callBack){
         progress.show();
-        UserAccount user;
-        new getUserDetails(newUser,callBack).execute();
+        String Type = "Login";
+        //UserAccount user;
+        new DBServerRequest(newUser,callBack, Type).execute();
     }
 
-    public class getUserDetails extends AsyncTask<Void, Void, UserAccount> {
+    public void DBRequestData(String Type, UserAccount newUser, CallBackInter newCallBack){
+        progress.show();
+        new DBServerRequest(newUser, newCallBack, Type).execute();
+    }
+
+
+    public class DBServerRequest extends AsyncTask<Void, Void, UserAccount> {
         UserAccount User;
         CallBackInter callBack;
-        public getUserDetails(UserAccount newUser, CallBackInter newCallBack){
+        String Type;
+        public DBServerRequest(UserAccount newUser, CallBackInter newCallBack, String PageType){
+            Type = PageType;
             User = newUser;
             callBack = newCallBack;
         }
@@ -61,15 +70,56 @@ public class DbRequest{
         @Override
         protected UserAccount doInBackground(Void... params) {
             //when working might change to arraylist
-            HashMap<String,String> DBLoginDetails = new HashMap<String,String>();
+            HashMap<String,String> DBDetails = new HashMap<String,String>();
             Log.d("check name", User.UserName);
-            DBLoginDetails.put("UserName", User.UserName);
-            DBLoginDetails.put("Password", User.Password);
+            if(Type.equals("Login")) {
+                DBDetails.put("UserName", User.UserName);
+                DBDetails.put("Password", User.Password);
+            }else if(Type.equals("AddUser")){
+                DBDetails.put("UserName", User.UserName);
+                DBDetails.put("Password", User.Password);
+                DBDetails.put("Name", User.name);
+                DBDetails.put("Age", Integer.toString(User.age));
+                DBDetails.put("Email", User.email);
+                //this is for optional text fields if nothing has been entered then set as not Specified
+                if(User.certificate != null || !(User.certificate.equals(""))){
+
+                    DBDetails.put("Certificate", User.certificate);
+                }else{
+                    DBDetails.put("Certificate","not Specified");
+                }
+                if(User.prevCollege != null || !(User.prevCollege.equals(""))){
+
+                    Log.d("check prevc", User.prevCollege);
+                    DBDetails.put("PrevCollege", User.prevCollege);
+                }else{
+                    DBDetails.put("PrevCollege","not Specified");
+                }
+                if(User.prevCourse != null || !(User.prevCourse.equals(""))){
+
+                    DBDetails.put("PrevCourse", User.prevCourse);
+                }else{
+                    DBDetails.put("PrevCourse","not Specified");
+                }
+                if(User.interests != null || !(User.interests.equals(""))){
+
+                    DBDetails.put("Interests", User.interests);
+                }else{
+                    DBDetails.put("Interests","not Specified");
+                }
+            }
             URL lUrl;
             UserAccount newUser = null;
-
+            String server = null;
             try{
-                lUrl = new URL(LoginUrl);
+                if(Type.equals("Login")){
+                   server = LoginUrl;
+                }else if(Type.equals("AddUser")){
+                   server = RegistrationUrl;
+                }else{
+                    Log.d("failed to check type","check type variables are correct");
+                }
+                lUrl = new URL(server);
                 HttpURLConnection DBConnection = (HttpURLConnection)lUrl.openConnection();
                 DBConnection.setConnectTimeout(TimeOut);
                 DBConnection.setReadTimeout(TimeOut);
@@ -79,7 +129,7 @@ public class DbRequest{
 
                 OutputStream oStream = DBConnection.getOutputStream();
                 BufferedWriter BW = new BufferedWriter(new OutputStreamWriter(oStream, "UTF-8"));
-                BW.write(getPostData(DBLoginDetails));
+                BW.write(getPostData(DBDetails));
                 BW.flush();
                 BW.close();
                 oStream.close();
@@ -98,27 +148,32 @@ public class DbRequest{
                 Log.d("check response", response);
                 //any log.d should be removed after testing
                 Log.d("response",response);
-                JSONObject jResponse = new JSONObject(response);
-                Log.d("H length", Integer.toString((jResponse.length())));
-                if(jResponse.length() == 0){
-                    Log.i("newUser is null", null);
-                    newUser = null;
-                }else{
-                    String name = jResponse.getString("UserName");
-                    newUser = new UserAccount(name,User.Password);
-                    Log.d("returned user2", newUser.UserName);
+                if(Type.equals("Login")) {
+                    JSONObject jResponse = new JSONObject(response);
+                    Log.d("H length", Integer.toString((jResponse.length())));
+                    if (jResponse.length() == 0) {
+                        Log.i("newUser is null", null);
+                        newUser = null;
+                    } else {
+                        String name = jResponse.getString("UserName");
+                        newUser = new UserAccount(name, User.Password);
+                        Log.d("returned user2", newUser.UserName);
+                    }
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-            return newUser;
+            if(Type.equals("Login")) {
+                return newUser;
+            }else{
+                return null;
+            }
         }
 
-        private String getPostData(HashMap<String,String> DBLoginDetails) throws UnsupportedEncodingException{
+        private String getPostData(HashMap<String,String> DBDetails) throws UnsupportedEncodingException{
             int i = 0;
             StringBuilder SB = new StringBuilder();
-            for(Map.Entry<String,String> entry : DBLoginDetails.entrySet()){
+            for(Map.Entry<String,String> entry : DBDetails.entrySet()){
                 if(i == 0){
                     i++;
                 }else{
@@ -136,131 +191,23 @@ public class DbRequest{
         @Override
         protected void onPostExecute(UserAccount newUser) {
             progress.dismiss();
-            callBack.complete(newUser);
+            Void aVoid = null;
+            if(Type.equals("Login")) {
+                callBack.complete(newUser);
+                super.onPostExecute(newUser);
+            } else if(Type.equals("AddUser")){
+                callBack.complete(null);
+                super.onPostExecute(null);
+            }else{
+                //nothing yet
+            }
             //Log.d("post execute", newUser.UserName);
-            super.onPostExecute(newUser);
-        }
-    }
-
-    public class addUserToDB extends AsyncTask<Void, Void, Void>{
-        UserAccount user;
-        CallBackInter Callback;
-
-        public addUserToDB(UserAccount newUser, CallBackInter newCallback){
-            user = newUser;
-            Callback = newCallback;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            progress.dismiss();
-            Callback.complete(null);
-            super.onPostExecute(aVoid);
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            HashMap<String,String> DBRegisterDetails = new HashMap<String,String>();
-            Log.d("check name", user.UserName);
-            DBRegisterDetails.put("UserName", user.UserName);
-            DBRegisterDetails.put("Password", user.Password);
-            DBRegisterDetails.put("Name", user.name);
-            DBRegisterDetails.put("Age", Integer.toString(user.age));
-            DBRegisterDetails.put("Email", user.email);
-
-            if(user.certificate != null || !(user.certificate.equals(""))){
-                //UBuilder.appendQueryParameter("Certificate", user.certificate);
-                DBRegisterDetails.put("Certificate", user.certificate);
-            }
-            if(user.prevCollege != null || !(user.prevCollege.equals(""))){
-                // UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
-                Log.d("check prevc", user.prevCollege);
-                DBRegisterDetails.put("PrevCollege", user.prevCollege);
-            }
-            if(user.prevCourse != null || !(user.prevCourse.equals(""))){
-                // UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
-                DBRegisterDetails.put("PrevCourse", user.prevCourse);
-            }
-            if(user.interests != null || !(user.interests.equals(""))){
-                // UBuilder.appendQueryParameter("Interests", user.interests);
-                DBRegisterDetails.put("Interests", user.interests);
-            }
-            try{
-                URL rUrl = new URL(RegistrationUrl);
-                HttpURLConnection DBConnection = (HttpURLConnection) rUrl.openConnection();
-                DBConnection.setConnectTimeout(TimeOut);
-                DBConnection.setReadTimeout(TimeOut);
-                DBConnection.setRequestMethod("POST");
-                DBConnection.setDoInput(true);
-                DBConnection.setDoOutput(true);
-
-//                Uri.Builder UBuilder = new Uri.Builder();
-//                UBuilder.appendQueryParameter("UserName", user.UserName);
-//                UBuilder.appendQueryParameter("Password", user.Password);
-//                UBuilder.appendQueryParameter("Name", user.name);
-//                UBuilder.appendQueryParameter("Age", Integer.toString(user.age));
-//                UBuilder.appendQueryParameter("Email", user.email);
-//                if(user.certificate != null && !(user.certificate.equals(""))){
-//                    //UBuilder.appendQueryParameter("Certificate", user.certificate);
-//                }
-//                if(user.prevCollege != null && !(user.prevCollege.equals(""))){
-//                   // UBuilder.appendQueryParameter("PrevCollege", user.prevCollege);
-//                }
-//                if(user.prevCourse != null && !(user.prevCourse.equals(""))){
-//                   // UBuilder.appendQueryParameter("PrevCourse", user.prevCourse);
-//                }
-//                if(user.interests != null && !(user.interests.equals(""))){
-//                   // UBuilder.appendQueryParameter("Interests", user.interests);
-//                }
-               // String DBquery = UBuilder.build().getEncodedQuery();
-                //Log.d("Query", DBquery);
-
-                OutputStream oStream = DBConnection.getOutputStream();
-                BufferedWriter BW = new BufferedWriter(new OutputStreamWriter(oStream,"UTF-8"));
-                BW.write(getPostData(DBRegisterDetails));
-                BW.flush();
-                BW.close();
-                oStream.close();
-                int responseCode = DBConnection.getResponseCode();
-                Log.d("code", Integer.toString(responseCode));
-                //DBConnection.connect();
-                Log.d("code", Integer.toString(responseCode));
-                //below my not be needed
-                InputStream IS = new BufferedInputStream(DBConnection.getInputStream());
-                BufferedReader ISReader = new BufferedReader(new InputStreamReader(IS));
-                StringBuilder SB = new StringBuilder();
-                String temp = "";
-                while((temp = ISReader.readLine()) != null){
-                    SB.append(temp);
-                }
-                ISReader.close();
-                String response = SB.toString();
-                Log.d("check response", response);
-            }catch (Exception e){
-                Log.d(null, "failed");
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        private String getPostData(HashMap<String,String> DBRegisterDetails) throws UnsupportedEncodingException{
-            int i = 0;
-            StringBuilder SB = new StringBuilder();
-            for(Map.Entry<String,String> entry : DBRegisterDetails.entrySet()){
-                if(i == 0){
-                    i++;
-                }else{
-                    SB.append("&");
-
-                }
-                SB.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-                SB.append("=");
-                SB.append(URLEncoder.encode(entry.getValue(),"UTF-8"));
-                //just for testing not needed
-                i++;
-            }
-            return SB.toString();
+            //super.onPostExecute(newUser);
         }
 
     }
+
+
 }
+
+

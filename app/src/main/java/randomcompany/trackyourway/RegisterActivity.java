@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         String sType = "AddUser";
         reg.DBRequestData(sType ,regUser, new CallBackInter() {
             @Override
-            public void complete(UserAccount newUser) {
+            public void complete(storeDbresults newObject) {
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 //end this activity
                 finish();

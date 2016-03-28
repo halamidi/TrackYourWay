@@ -57,7 +57,7 @@ public class DbRequest{
     }
 
 
-    public class DBServerRequest extends AsyncTask<Void, Void, UserAccount> {
+    public class DBServerRequest extends AsyncTask<Void, Void, storeDbresults> {
         UserAccount User;
         CallBackInter callBack;
         String Type;
@@ -68,7 +68,7 @@ public class DbRequest{
         }
 
         @Override
-        protected UserAccount doInBackground(Void... params) {
+        protected storeDbresults doInBackground(Void... params) {
             //when working might change to arraylist
             HashMap<String,String> DBDetails = new HashMap<String,String>();
             Log.d("check name", User.UserName);
@@ -164,7 +164,9 @@ public class DbRequest{
                 e.printStackTrace();
             }
             if(Type.equals("Login")) {
-                return newUser;
+                storeDbresults tempObject = new storeDbresults();
+                tempObject.setTempUser(newUser);
+                return tempObject;
             }else{
                 return null;
             }
@@ -189,23 +191,43 @@ public class DbRequest{
         }
 
         @Override
-        protected void onPostExecute(UserAccount newUser) {
+        protected void onPostExecute(storeDbresults newObject) {
             progress.dismiss();
-            Void aVoid = null;
             if(Type.equals("Login")) {
-                callBack.complete(newUser);
-                super.onPostExecute(newUser);
+                callBack.complete(newObject);
+                super.onPostExecute(newObject);
             } else if(Type.equals("AddUser")){
                 callBack.complete(null);
                 super.onPostExecute(null);
             }else{
                 //nothing yet
             }
-            //Log.d("post execute", newUser.UserName);
-            //super.onPostExecute(newUser);
         }
+//
+//        @Override
+//        protected void onPostExecute(UserAccount newUser) {
+//            progress.dismiss();
+//            if(Type.equals("Login")) {
+//                callBack.complete(newUser);
+//                super.onPostExecute(newUser);
+//            } else if(Type.equals("AddUser")){
+//                callBack.complete(null);
+//                super.onPostExecute(null);
+//            }else{
+//                //nothing yet
+//            }
+//            //Log.d("post execute", newUser.UserName);
+//            //super.onPostExecute(newUser);
+//        }
 
     }
+
+//    public storeDbresults setDBLogin(UserAccount newUser){
+//        Object tempObject = new storeDbresults();
+//        //task try use objects rather than making a new one like above
+//        tempObject.setTempUser(newUser);
+//        return tempObject;
+//    }
 
 
 }

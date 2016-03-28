@@ -14,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText userName,password;
     private TextView Warninglbl;
     LocalUserDetails details;
+    storeDbresults DBObjects = new storeDbresults();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.loginBtn:
-                if (userName.getText().toString().equals("") || userName.getText().toString() == null) {
+                if (userName.getText().toString().equals("") && userName.getText().toString().equals(null)) {
                     Warninglbl.setText("please enter your username");
-                }else if(password.getText().toString().equals("") || password.getText().toString() == null){
+                }else if(password.getText().toString().equals("") && password.getText().toString().equals(null)){
                     Warninglbl.setText("please enter your Password");
                 }else{
                     String lUserName = userName.getText().toString();
@@ -68,7 +69,11 @@ public class LoginActivity extends AppCompatActivity {
         DbRequest newRequest = new DbRequest(this);
         newRequest.DbRetrieveDetails(newUserLogin, new CallBackInter() {
             @Override
-            public void complete(UserAccount userLogin) {
+            public void complete(storeDbresults newObject) {
+            //public void complete(UserAccount userLogin) {
+
+                UserAccount userLogin = newObject.getTempUser();
+                Log.d("testing object", userLogin.UserName);
                 if(userLogin == null){
                     Log.d(null,"something has gone wrong");
                     Warninglbl.setText("user details were incorrect");

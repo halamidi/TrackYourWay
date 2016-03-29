@@ -7,8 +7,24 @@ public class UserAccount {
     //this is a test user more data will need to be added when userlogin is fully functional
     String UserName, Password,name,email,certificate,prevCollege,prevCourse,interests;
     int age;
-    //password will be removed from here and will be using set password instead at a later date
-    //this is so when writing user details on phone the password dose not print out
+    //this one is for details received from database or saved on the phone
+    public UserAccount(String newUserName, String newName, int newAge, String newEmail, String newCertificate, String newCollege, String newCourse, String newInterests){
+        UserName = newUserName;
+        name = newName;
+        age = newAge;
+        email = newEmail;
+        certificate  = newCertificate;
+        prevCollege = newCollege;
+        prevCourse = newCourse;
+        interests = newInterests;
+    }
+    //this is for login
+    public UserAccount(String newUserName, String newPassword){
+        UserName = newUserName;
+        Password = newPassword;
+
+    }
+    //this is for registering
     public UserAccount(String newUserName, String newPassword, String newName, int newAge, String newEmail){
         UserName = newUserName;
         Password = newPassword;
@@ -20,11 +36,14 @@ public class UserAccount {
         prevCourse = new String();
         interests = new String();
     }
-    //this is for login
-    public UserAccount(String newUserName, String newPassword){
-        UserName = newUserName;
-        Password = newPassword;
 
+    public boolean checkEmpty(){
+        if(UserName == null){
+            return true;
+        }else{
+            return false;
+        }
+        //return isEmpty(UserName); this crashes when null pointless feature
     }
     public String getUserName(){
         return UserName;

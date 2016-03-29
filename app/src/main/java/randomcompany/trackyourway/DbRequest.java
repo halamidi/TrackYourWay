@@ -44,11 +44,13 @@ public class DbRequest{
        // new addUserToDB(newUser, newCallBack).execute();
     }
 
-    public void DbRetrieveDetails(UserAccount newUser, CallBackInter callBack){
+    public void DbRetrieveDetails(storeDbresults newUser, CallBackInter callBack){
         progress.show();
         String Type = "Login";
+        UserAccount tempUser = newUser.getTempUser();
+        Log.d("user from login", tempUser.UserName);
         //UserAccount user;
-        new DBServerRequest(newUser,callBack, Type).execute();
+        new DBServerRequest(tempUser,callBack, Type).execute();
     }
 
     public void DBRequestData(String Type, UserAccount newUser, CallBackInter newCallBack){
@@ -155,8 +157,17 @@ public class DbRequest{
                         Log.i("newUser is null", null);
                         newUser = null;
                     } else {
-                        String name = jResponse.getString("UserName");
-                        newUser = new UserAccount(name, User.Password);
+                        String name = jResponse.getString("Name");
+                        String email = jResponse.getString("Email");
+                        String age = jResponse.getString("Age");
+                        String prevCert = jResponse.getString("Cert");
+                        String interests = jResponse.getString("Interests");
+                        String prevCollege = jResponse.getString("College");
+                        String prevCourse = jResponse.getString("Course");
+                        String userName = jResponse.getString("UserName");
+
+                        //String newUserName, String newName, int newAge, String newEmail
+                        newUser = new UserAccount(userName, name, Integer.parseInt(age), email, prevCert, prevCollege, prevCourse, interests);
                         Log.d("returned user2", newUser.UserName);
                     }
                 }

@@ -54,7 +54,9 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     String lUserName = userName.getText().toString();
                     String lPassword = password.getText().toString();
-                    UserAccount userLogin = new UserAccount(lUserName, lPassword);
+                    UserAccount tempuserLogin = new UserAccount(lUserName, lPassword);
+                    storeDbresults userLogin = new storeDbresults();
+                    userLogin.setTempUser(tempuserLogin);
                     CheckDetails(userLogin);
                 }
                 break;
@@ -64,22 +66,28 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void CheckDetails(UserAccount newUserLogin){
+    private void CheckDetails(final storeDbresults newUserLogin){
 
         DbRequest newRequest = new DbRequest(this);
         newRequest.DbRetrieveDetails(newUserLogin, new CallBackInter() {
             @Override
             public void complete(storeDbresults newObject) {
             //public void complete(UserAccount userLogin) {
-
+                //get variables
                 UserAccount userLogin = newObject.getTempUser();
-                Log.d("testing object", userLogin.UserName);
-                if(userLogin == null){
+                //test variables
+
+                //check if correct
+                if(userLogin == null/*userLogin.checkEmpty() == true*/){
                     Log.d(null,"something has gone wrong");
                     Warninglbl.setText("user details were incorrect");
-                }else if(userLogin != null){
+                }else if(userLogin != null/*userLogin.checkEmpty() == false*/){
+                    Log.d("testing object", userLogin.UserName);
+                    //store details locally
                     details.storeDetails(userLogin);
+                    //set user as logged in untill log out button is selected.
                     details.setIsLoggedIn(true);
+                    //move to main content
                     Intent i = new Intent(getApplicationContext(), MainHub_Activity.class);
                     startActivity(i);
                 }else{

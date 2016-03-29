@@ -4,12 +4,10 @@ package randomcompany.navigationdrawer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import randomcompany.trackyourway.R;
 
 
 /**
@@ -30,7 +28,7 @@ public class SearchFragment extends AppCompatActivity {
 
         instituteTf = (EditText) findViewById(R.id.instituteTf);
         courseTf = (EditText) findViewById(R.id.courseTf);
-        SearchBtn = (ImageButton) findViewById(R.id.SearchBtn);
+        SearchBtn = (ImageButton) findViewById(R.id.newSearchBtn);
         locationTf = (EditText) findViewById(R.id.locationTf);
         courseTypeTf = (EditText) findViewById(R.id.courseTypeTf);
     }

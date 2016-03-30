@@ -5,6 +5,7 @@ package randomcompany.trackyourway;
  */
 public class storeDbresults {
     UserAccount tempUser;
+
     public storeDbresults(){
        //tempUser = null;
     }

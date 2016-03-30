@@ -170,6 +170,26 @@ public class DbRequest{
                         newUser = new UserAccount(userName, name, Integer.parseInt(age), email, prevCert, prevCollege, prevCourse, interests);
                         Log.d("returned user2", newUser.UserName);
                     }
+
+                }else if(Type.equals("Calendar")){
+                    JSONObject jResponse = new JSONObject(response);
+                    Log.d("H length", Integer.toString((jResponse.length())));
+                    if (jResponse.length() == 0) {
+                        Log.i("newUser is null", null);
+                        newUser = null;
+                    } else {
+                        for(int i = 0; i < jResponse.length(); i++){
+                        String results = jResponse.getString(Integer.toString(i));
+                        String[][] eventsDetails = new String[7][];
+                            int j = 0;
+                            for (String result: results.split("|")) {
+                                //from here all that needs to be done is to put all details into an object or an array of objects
+                                //alternativly you dont need to use the array below at all you could just put all details straight into the object then an arraylist which would be more efficent
+                                eventsDetails[i][j] = result;
+                                j++;
+                            }
+                        }
+                    }
                 }
             }catch (Exception e){
                 e.printStackTrace();

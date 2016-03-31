@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.registerBtn:
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
+                break;
         }
     }
 

@@ -25,5 +25,5 @@
         android:id="@+id/listView"
         android:layout_below="@+id/textView15"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff" />
+        android:background="#a3ffffff" />
 </RelativeLayout>

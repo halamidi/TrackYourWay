@@ -7,22 +7,33 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainHub_Activity extends AppCompatActivity {
-    ImageButton ForumBtn;
+    ImageButton ForumBtn, savedSearch, newSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_hub_);
         ForumBtn = (ImageButton)findViewById(R.id.forum_btn);
-
-
+        savedSearch = (ImageButton)findViewById(R.id.savedSearchBtn);
+        newSearch = (ImageButton)findViewById(R.id.newSearchBtn);
 
         ForumBtn.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                                Intent i = new Intent(getApplicationContext(), Comments_Rating_Activity.class);
+                            Intent i;
+                                 i = new Intent(getApplicationContext(), Comments_Rating_Activity.class);
                                 startActivity(i);
-                            }
-
-                            });
+                            }});
+        savedSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Saved_Results_Activity.class);
+                startActivity(i);
+            }});
+        newSearch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SearchFragment.class);
+                startActivity(i);
+            }
+        });
     }
 
 

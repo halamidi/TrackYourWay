@@ -64,7 +64,8 @@
         <activity android:name=".MainHub_Activity" />
         <activity android:name=".Comments_Rating_Activity" />
         <activity android:name=".College_Info_Activity" />
-        <activity android:name=".Saved_Results_Activity"></activity>
+        <activity android:name=".Saved_Results_Activity" />
+        <activity android:name=".Calendar_Activity"></activity>
     </application>
 
 </manifest>

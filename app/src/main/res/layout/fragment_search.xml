@@ -1,0 +1,80 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment"
+    android:background="@drawable/background">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="New Search Fragment" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Please search by any of the following"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="65dp"
+        android:textColor="#e0dede" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instituteTf"
+        android:layout_gravity="left|top"
+        android:autoText="false"
+        android:background="#a69f9f"
+        android:hint="Institution name"
+        android:layout_marginTop="125dp"
+        android:layout_marginLeft="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/courseTf"
+        android:layout_gravity="left|top"
+        android:background="#a69f9f"
+        android:hint="Course name"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/courseTypeTf"
+        android:layout_gravity="left|top"
+        android:background="#a69f9f"
+        android:hint="Course type"
+        android:layout_marginTop="275dp"
+        android:layout_marginLeft="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationTf"
+        android:layout_gravity="left|top"
+        android:background="#a69f9f"
+        android:hint="City/Town"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="10dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/newSearchBtn"
+        android:background="@drawable/search3"
+        android:clickable="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/textView16"
+        android:layout_alignEnd="@+id/textView18"
+        android:layout_alignRight="@+id/textView18"
+        android:layout_gravity="center_horizontal|bottom" />
+
+
+
+
+</FrameLayout>

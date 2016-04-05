@@ -4,7 +4,7 @@ package randomcompany.trackyourway;
  * Created by Hassan on 27/03/2016.
  */
 public class storeDbresults {
-    UserAccount tempUser;
+    static UserAccount tempUser;
 
     public storeDbresults(){
        //tempUser = null;

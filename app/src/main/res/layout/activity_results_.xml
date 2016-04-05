@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Displaying Results For:"
+        android:text="@string/displaying"
         android:id="@+id/textView15"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -25,5 +25,8 @@
         android:id="@+id/listView"
         android:layout_below="@+id/textView15"
         android:layout_centerHorizontal="true"
-        android:background="#a3ffffff" />
+        android:background="@android:drawable/zoom_plate"
+
+        />
+    <!--android:background="#a3ffffff" -->
 </RelativeLayout>

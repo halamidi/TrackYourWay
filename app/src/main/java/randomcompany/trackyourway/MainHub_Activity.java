@@ -3,6 +3,7 @@ package randomcompany.trackyourway;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -15,7 +16,9 @@ public class MainHub_Activity extends AppCompatActivity {
         ForumBtn = (ImageButton)findViewById(R.id.forum_btn);
         savedSearch = (ImageButton)findViewById(R.id.savedSearchBtn);
         newSearch = (ImageButton)findViewById(R.id.newSearchBtn);
-
+        storeDbresults results = new storeDbresults();
+        UserAccount test = results.getTempUser();
+        Log.d("checking if object", test.getUserName());
         ForumBtn.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Intent i;

@@ -1,5 +1,6 @@
 package randomcompany.trackyourway;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.ListView;
 
 public class Results_Activity extends AppCompatActivity {
     ListView courseDetails;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +25,8 @@ public class Results_Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        //page not implemented yet
-//                        Intent i = new Intent(getApplicationContext(),CourseDetails.class);
-//                        startActivity(i);
+                        Intent i = new Intent(getApplicationContext(),College_Info_Activity.class);
+                        startActivity(i);
 
                         break;
                 }

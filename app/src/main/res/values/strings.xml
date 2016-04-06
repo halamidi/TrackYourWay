@@ -122,4 +122,5 @@
     <string name="Info">Information</string>
     <string name="displaymap">Display on Map</string>
     <string name="dirction">Get Directions</string>
+    <string name="displaying">Displaying Results For:</string>
 </resources>

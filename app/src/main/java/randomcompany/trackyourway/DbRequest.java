@@ -29,7 +29,8 @@ public class DbRequest{
     public static final int TimeOut = 1500*155;
     private static final String LoginUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Login.php"; //"http://10.0.2.2/Login.php"; //this one is for xampp
     private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";//"http://10.0.2.2/Registration.php"; //this is for xampp
-
+    HashMap<String,String> DBDetails = new HashMap<String,String>();
+    String Type;
     public DbRequest(Context context){
         progress = new ProgressDialog(context);
         progress.setCancelable(false);
@@ -62,7 +63,7 @@ public class DbRequest{
     public class DBServerRequest extends AsyncTask<Void, Void, storeDbresults> {
         UserAccount User;
         CallBackInter callBack;
-        String Type;
+
         public DBServerRequest(UserAccount newUser, CallBackInter newCallBack, String PageType){
             Type = PageType;
             User = newUser;
@@ -71,49 +72,18 @@ public class DbRequest{
 
         @Override
         protected storeDbresults doInBackground(Void... params) {
-            //when working might change to arraylist
-            HashMap<String,String> DBDetails = new HashMap<String,String>();
-            Log.d("check name", User.UserName);
-            if(Type.equals("Login")) {
-                DBDetails.put("UserName", User.UserName);
-                DBDetails.put("Password", User.Password);
-            }else if(Type.equals("AddUser")){
-                DBDetails.put("UserName", User.UserName);
-                DBDetails.put("Password", User.Password);
-                DBDetails.put("Name", User.name);
-                DBDetails.put("Age", Integer.toString(User.age));
-                DBDetails.put("Email", User.email);
-                //this is for optional text fields if nothing has been entered then set as not Specified
-                if(User.certificate != null || !(User.certificate.equals(""))){
-
-                    DBDetails.put("Certificate", User.certificate);
-                }else{
-                    DBDetails.put("Certificate","not Specified");
-                }
-                if(User.prevCollege != null || !(User.prevCollege.equals(""))){
-
-                    Log.d("check prevc", User.prevCollege);
-                    DBDetails.put("PrevCollege", User.prevCollege);
-                }else{
-                    DBDetails.put("PrevCollege","not Specified");
-                }
-                if(User.prevCourse != null || !(User.prevCourse.equals(""))){
-
-                    DBDetails.put("PrevCourse", User.prevCourse);
-                }else{
-                    DBDetails.put("PrevCourse","not Specified");
-                }
-                if(User.interests != null || !(User.interests.equals(""))){
-
-                    DBDetails.put("Interests", User.interests);
-                }else{
-                    DBDetails.put("Interests","not Specified");
-                }
-            }
+            //call setVariables which is used to set variables sent from previous page
+            setVariables();
+            //declare a url
             URL lUrl;
+            //define and initialize object and server url string
             UserAccount newUser = null;
             String server = null;
+            //try catch errors
             try{
+                //depending on where in the application the request was sent from will depend on the server url
+                //for example if user came from login page, that page will send a string called Type containing Login
+                //so if Type string contains Login then set the url to the login php file
                 if(Type.equals("Login")){
                    server = LoginUrl;
                 }else if(Type.equals("AddUser")){
@@ -121,14 +91,18 @@ public class DbRequest{
                 }else{
                     Log.d("failed to check type","check type variables are correct");
                 }
+                //set url
                 lUrl = new URL(server);
+                //create connection
                 HttpURLConnection DBConnection = (HttpURLConnection)lUrl.openConnection();
+                //set time out. this means if either connection to the php or reading from the php and database takes too long the entire connection will end
                 DBConnection.setConnectTimeout(TimeOut);
                 DBConnection.setReadTimeout(TimeOut);
+                //set request method, which in our case is POST
                 DBConnection.setRequestMethod("POST");
                 DBConnection.setDoInput(true);
                 DBConnection.setDoOutput(true);
-
+                //set output stream
                 OutputStream oStream = DBConnection.getOutputStream();
                 BufferedWriter BW = new BufferedWriter(new OutputStreamWriter(oStream, "UTF-8"));
                 BW.write(getPostData(DBDetails));
@@ -203,26 +177,81 @@ public class DbRequest{
             }
         }
 
+        public void setVariables(){
+            //depending on where in the application the request was sent from will depend on the details to be put into the hashmap
+            //for example if user came from login page, that page will send a string called Type containing Login
+            //so if Type string contains Login then set variables related to login page
+            if(Type.equals("Login")) {
+                //set variables sent from previous page
+                DBDetails.put("UserName", User.UserName);
+                DBDetails.put("Password", User.Password);
+            }else if(Type.equals("AddUser")){
+                //set variables sent from previous page
+                DBDetails.put("UserName", User.UserName);
+                DBDetails.put("Password", User.Password);
+                DBDetails.put("Name", User.name);
+                DBDetails.put("Age", Integer.toString(User.age));
+                DBDetails.put("Email", User.email);
+                //this is for optional text fields if nothing has been entered then set as not Specified
+                //not specified string is used because the emulator will crash when attempting to read a null string, so to prevent this we set the variable to not specified in the database
+                if(User.certificate != null || !(User.certificate.equals(""))){
+
+                    DBDetails.put("Certificate", User.certificate);
+                }else{
+                    DBDetails.put("Certificate","not Specified");
+                }
+                if(User.prevCollege != null || !(User.prevCollege.equals(""))){
+
+                    Log.d("check prevc", User.prevCollege);
+                    DBDetails.put("PrevCollege", User.prevCollege);
+                }else{
+                    DBDetails.put("PrevCollege","not Specified");
+                }
+                if(User.prevCourse != null || !(User.prevCourse.equals(""))){
+
+                    DBDetails.put("PrevCourse", User.prevCourse);
+                }else{
+                    DBDetails.put("PrevCourse","not Specified");
+                }
+                if(User.interests != null || !(User.interests.equals(""))){
+
+                    DBDetails.put("Interests", User.interests);
+                }else{
+                    DBDetails.put("Interests","not Specified");
+                }
+            }
+
+        }
+
         private String getPostData(HashMap<String,String> DBDetails) throws UnsupportedEncodingException{
             int i = 0;
+            //create and initialize string builder
             StringBuilder SB = new StringBuilder();
+            //for every set of values(key,value) put in the hashmap, repeat loop
             for(Map.Entry<String,String> entry : DBDetails.entrySet()){
+                //if this is the first loop set i to 1 else add an ampersand to the string builder
                 if(i == 0){
                     i++;
                 }else{
+                    //add ampersand between each POST value
                     SB.append("&");
 
                 }
+                //get the key, which is the first value in the hashmap
                 SB.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                //add string between key and value
                 SB.append("=");
+                //get value which is the second value in the hashmap
                 SB.append(URLEncoder.encode(entry.getValue(),"UTF-8"));
 
             }
+            //return stringbuilder when finished
             return SB.toString();
         }
 
         @Override
         protected void onPostExecute(storeDbresults newObject) {
+            //this ends the progress dialog
             progress.dismiss();
             if(Type.equals("Login")) {
                 callBack.complete(newObject);

@@ -10,16 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button Loginbtn, Registerbtn;
+
     private EditText userName,password;
     private TextView Warninglbl;
     LocalUserDetails details;
-    storeDbresults DBObjects = new storeDbresults();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginuser);
-        //Loginbtn = (Button)findViewById(R.id.loginBtn);
+        Button Loginbtn = (Button)findViewById(R.id.loginBtn);
         //Registerbtn = (Button) findViewById(R.id.registerBtn);
         userName = (EditText) findViewById(R.id.userNameTxt);
         password = (EditText) findViewById(R.id.passwordTxt);
@@ -44,22 +43,31 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //if a button has been clicked start this method
     public void onClick(View v) {
+        //get selected button id and do something based on what is contained within the id's case
         switch(v.getId()) {
+            //user login
             case R.id.loginBtn:
+                //check if user has entered username and password
                 if (userName.getText().toString().equals("") && userName.getText().toString().equals(null)) {
                     Warninglbl.setText("please enter your username");
                 }else if(password.getText().toString().equals("") && password.getText().toString().equals(null)){
                     Warninglbl.setText("please enter your Password");
                 }else{
+                    //get details from textbox
                     String lUserName = userName.getText().toString();
                     String lPassword = password.getText().toString();
+                    //store user login details in an object
                     UserAccount tempuserLogin = new UserAccount(lUserName, lPassword);
+                    //store userlogin object into a wrapper object
                     storeDbresults userLogin = new storeDbresults();
                     userLogin.setTempUser(tempuserLogin);
+                    //send details off to database request and check the details recieved
                     CheckDetails(userLogin);
                 }
                 break;
+            //user register
             case R.id.registerBtn:
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
@@ -67,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void CheckDetails(final storeDbresults newUserLogin){
-
+    private void CheckDetails(storeDbresults newUserLogin){
+        //send data to database request
         DbRequest newRequest = new DbRequest(this);
         newRequest.DbRetrieveDetails(newUserLogin, new CallBackInter() {
             @Override
@@ -82,17 +90,18 @@ public class LoginActivity extends AppCompatActivity {
                 if(userLogin == null/*userLogin.checkEmpty() == true*/){
                     Log.d(null,"something has gone wrong");
                     Warninglbl.setText("user details were incorrect");
-                }else if(userLogin != null/*userLogin.checkEmpty() == false*/){
+                }else{
                     Log.d("testing object", userLogin.UserName);
                     //store details locally
                     details.storeDetails(userLogin);
-                    //set user as logged in untill log out button is selected.
+                    //set user as logged in until log out button is selected.
                     details.setIsLoggedIn(true);
                     //move to main content
+                    storeDbresults results = new storeDbresults();
+                    results.setTempUser(userLogin);
+                    //open new page
                     Intent i = new Intent(getApplicationContext(), MainHub_Activity.class);
                     startActivity(i);
-                }else{
-                    Log.d(null,"something has gone wrong");
                 }
             }
         });

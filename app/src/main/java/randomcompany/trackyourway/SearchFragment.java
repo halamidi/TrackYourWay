@@ -1,13 +1,13 @@
-package randomcompany.navigationdrawer;
+package randomcompany.trackyourway;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
-import randomcompany.trackyourway.R;
 
 
 /**
@@ -31,6 +31,15 @@ public class SearchFragment extends AppCompatActivity {
         SearchBtn = (ImageButton) findViewById(R.id.newSearchBtn);
         locationTf = (EditText) findViewById(R.id.locationTf);
         courseTypeTf = (EditText) findViewById(R.id.courseTypeTf);
+
+
+        SearchBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(getApplicationContext(), Results_Activity.class);
+                startActivity(i);
+            }
+        });
     }
 
 

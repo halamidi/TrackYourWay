@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="randomcompany.trackyourway.Calendar_Activity">
+    tools:context="randomcompany.trackyourway.Calendar_Activity"
+    android:background="@drawable/background">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,14 +17,17 @@
         android:text="National College Of Ireland"
         android:id="@+id/txtCollegeNameHeading"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff" />
 
     <CalendarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/calendarView"
         android:layout_below="@+id/txtCollegeNameHeading"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#d1d0d0"
+        android:contextClickable="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +36,9 @@
         android:id="@+id/textView23"
         android:layout_below="@+id/calendarView"
         android:layout_centerHorizontal="true"
-        android:editable="false" />
+        android:editable="false"
+
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,6 +47,7 @@
         android:text="Large Text"
         android:id="@+id/txtDisplayEvents"
         android:layout_below="@+id/textView23"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

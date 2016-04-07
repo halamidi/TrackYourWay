@@ -22,7 +22,7 @@ public class MainHub_Activity extends AppCompatActivity {
         ForumBtn.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Intent i;
-                                 i = new Intent(getApplicationContext(), Comments_Rating_Activity.class);
+                                 i = new Intent(getApplicationContext(), Calendar_Activity.class/*Comments_Rating_Activity.class*/);
                                 startActivity(i);
                             }});
         savedSearch.setOnClickListener(new View.OnClickListener() {

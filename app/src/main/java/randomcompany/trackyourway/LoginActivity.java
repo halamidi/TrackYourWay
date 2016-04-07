@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     UserAccount tempuserLogin = new UserAccount(lUserName, lPassword);
                     //store userlogin object into a wrapper object
                     storeDbresults userLogin = new storeDbresults();
-                    userLogin.setTempUser(tempuserLogin);
+                    userLogin.setTempUser(tempuserLogin);//
                     //send details off to database request and check the details recieved
                     CheckDetails(userLogin);
                 }
@@ -77,8 +77,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void CheckDetails(storeDbresults newUserLogin){
         //send data to database request
+        String Type = "Login";
         DbRequest newRequest = new DbRequest(this);
-        newRequest.DbRetrieveDetails(newUserLogin, new CallBackInter() {
+        newRequest.DbRetrieveDetails(Type, newUserLogin, new CallBackInter() {
             @Override
             public void complete(storeDbresults newObject) {
             //public void complete(UserAccount userLogin) {

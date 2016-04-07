@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class DbRequest{
     ProgressDialog progress;
-    public static final int TimeOut = 1500*155;
+    private static final int TimeOut = 1500*155;
     private static final String LoginUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Login.php"; //"http://10.0.2.2/Login.php"; //this one is for xampp
     private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";//"http://10.0.2.2/Registration.php"; //this is for xampp
     HashMap<String,String> DBDetails = new HashMap<String,String>();
@@ -40,16 +40,14 @@ public class DbRequest{
 
     }
 
-    public void DbStoreDetails(UserAccount newUser, CallBackInter newCallBack){
-        progress.show();
-       // new addUserToDB(newUser, newCallBack).execute();
-    }
 
-    public void DbRetrieveDetails(storeDbresults newUser, CallBackInter callBack){
+    public void DbRetrieveDetails(String Type, storeDbresults newUser, CallBackInter callBack){
         progress.show();
-        String Type = "Login";
+        //String Type = "Login";
         UserAccount tempUser = newUser.getTempUser();
-        Log.d("user from login", tempUser.UserName);
+        if(Type.equals("Login")) {
+            Log.d("user from login", tempUser.UserName);
+        }
         //UserAccount user;
         new DBServerRequest(tempUser,callBack, Type).execute();
     }
@@ -219,6 +217,8 @@ public class DbRequest{
                 }else{
                     DBDetails.put("Interests","not Specified");
                 }
+            }else if(Type.equals("Calendar")){
+
             }
 
         }

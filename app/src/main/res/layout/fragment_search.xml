@@ -6,10 +6,6 @@
     android:background="@drawable/background">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="New Search Fragment" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +14,7 @@
         android:text="Please search by any of the following"
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="35dp"
         android:textColor="#e0dede" />
 
     <EditText
@@ -29,7 +25,7 @@
         android:autoText="false"
         android:background="#a69f9f"
         android:hint="Institution name"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="95dp"
         android:layout_marginLeft="10dp" />
 
     <EditText
@@ -39,7 +35,7 @@
         android:layout_gravity="left|top"
         android:background="#a69f9f"
         android:hint="Course name"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="165dp"
         android:layout_marginLeft="10dp" />
 
     <EditText
@@ -49,7 +45,7 @@
         android:layout_gravity="left|top"
         android:background="#a69f9f"
         android:hint="Course type"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="240dp"
         android:layout_marginLeft="10dp" />
 
     <EditText
@@ -59,7 +55,18 @@
         android:layout_gravity="left|top"
         android:background="#a69f9f"
         android:hint="City/Town"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="315dp"
+        android:layout_marginLeft="10dp" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/keywords"
+        android:layout_gravity="left|top"
+        android:background="#a69f9f"
+        android:hint="KeyWords"
+        android:layout_marginTop="385dp"
         android:layout_marginLeft="10dp" />
 
     <ImageButton
@@ -74,7 +81,11 @@
         android:layout_alignRight="@+id/textView18"
         android:layout_gravity="center_horizontal|bottom" />
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="New Search Fragment"
+        android:layout_gravity="center_horizontal|bottom" />
 
 
 </FrameLayout>

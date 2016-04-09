@@ -76,7 +76,7 @@ public class SearchFragment extends AppCompatActivity {
 //                    Log.d("you have not ", "entered any details");
 //                }
                 //set variable
-                if (CollegeName.equals("") && CollegeName.equals(null)) {
+                if (CollegeName.equals(null)) {
                     Log.d("you have not ", "entered any details");
                 }else {
                     storeParam.setUserSearch(CollegeName);

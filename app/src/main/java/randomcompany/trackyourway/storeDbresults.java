@@ -1,18 +1,24 @@
 package randomcompany.trackyourway;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hassan on 27/03/2016.
  */
 public class storeDbresults {
+    //This object is used for interacting with methods in the DbRequest
+    //the reason for this is rather than making multiple methods to deal with different variables i can just use one object to store all variables and use whats needed at the time
+    //this only makes sense since they all essentially do the same thing send data to a php file and sometime get data back
     //declare objects
     //user is set to static to allow user to view details anywhere in the application
     static UserAccount tempUser;
     CollegeDetails tempCollegeDetails;
     CourseDetails tempCourseDetails;
-    String userSearch;
+    String userSearch, date;
     //events are set to staic so application does not have to make new requests everytime the user visits the calendar during their session
     //not sure if events will be stored here
-    static Events collegeEvents;
+    Events collegeEvents;
+    ArrayList<Object> multiResult = new ArrayList<Object>();
     public storeDbresults(){
        //tempUser = null;
     }
@@ -48,7 +54,28 @@ public class storeDbresults {
         return tempCourseDetails;
     }
 
+    public void setCollegeEvents(Events newEvents){
+        collegeEvents = newEvents;
+    }
 
+    public Events getCollegeEvents(){
+        return collegeEvents;
+    }
+
+    public void setMultiResult(ArrayList newMultiResult){
+        multiResult = newMultiResult;
+    }
+
+    public ArrayList getMultiResult(){
+        return multiResult;
+    }
+
+    public void setDate(String d){
+        date = d;
+    }
+    public String getDate(){
+        return date;
+    }
 
 
 

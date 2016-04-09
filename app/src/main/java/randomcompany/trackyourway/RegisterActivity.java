@@ -71,7 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
     private void UserRegistrationDetails(UserAccount regUser){
         DbRequest reg = new DbRequest(this);
         String sType = "AddUser";
-        reg.DBRequestData(sType ,regUser, new CallBackInter() {
+        storeDbresults newUser = new storeDbresults();
+        newUser.setTempUser(regUser);
+        reg.DbRetrieveDetails(sType ,newUser, new CallBackInter() {
             @Override
             public void complete(storeDbresults newObject) {
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);

@@ -8,13 +8,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Calendar_Activity extends AppCompatActivity {
 
     CalendarView calendarView;
     TextView displayEvents;
-
+    storeDbresults storeParam = new storeDbresults();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,5 +42,38 @@ public class Calendar_Activity extends AppCompatActivity {
             }
         });
 
+        if (date.equals(null)) {
+            Log.d("you have not ", "entered any details");
+        }else {
+            storeParam.setDate(date);
+            CheckDetails(storeParam);
+        }
+    }
+
+
+    private void CheckDetails(storeDbresults newSearchParam){
+        //send data to database request
+        String Type = "Events";
+        DbRequest newRequest = new DbRequest(this);
+        newRequest.DbRetrieveDetails(Type, newSearchParam, new CallBackInter() {
+            @Override
+            public void complete(storeDbresults newObject) {
+                ArrayList<Events> allEvents = new ArrayList<>();
+                storeDbresults searchPerams = newObject;
+                allEvents = searchPerams.getMultiResult();
+                //check if correct
+                if (allEvents == null /*userLogin.checkEmpty() == true*/) {
+                    Log.d(null, "something has gone wrong");
+                    //Warninglbl.setText("user details were incorrect");
+                } else if(allEvents.isEmpty()) {
+                    Log.d(null, "something has gone wrong");
+                }else{
+
+                    Events newEvents = allEvents.get(0);
+                    Log.d("testing object", newEvents.eventDate);
+
+                }
+            }
+        });
     }
 }

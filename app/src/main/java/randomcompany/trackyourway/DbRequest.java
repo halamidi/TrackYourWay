@@ -33,7 +33,7 @@ public class DbRequest{
     private static final String RegistrationUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Registration.php";//"http://10.0.2.2/Registration.php"; //this is for xampp
     private static final String SearchUrl = "https://trackyourway-sunny-shakya-1.c9users.io/getData.php";
     private static final String EventsUrl = "https://trackyourway-sunny-shakya-1.c9users.io/Calendar.php";// "http://10.0.2.2/Calendar.php"; //
-
+    private static final String RatingUrl = "";
     private HashMap<String,String> DBDetails = new HashMap<String,String>();
     public ArrayList<Object> multiResult = new ArrayList<>();
     public String Type,Search;
@@ -42,7 +42,6 @@ public class DbRequest{
         progress.setCancelable(false);
         progress.setTitle("Request Is being sent");
         progress.setMessage("Please Be Patient...");
-
 
     }
 

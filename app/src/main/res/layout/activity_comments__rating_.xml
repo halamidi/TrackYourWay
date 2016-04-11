@@ -27,7 +27,9 @@
         android:id="@+id/ratingBar"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/textView20"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:rating="5"
+        android:numStars="5" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +39,7 @@
         android:id="@+id/textView21"
         android:layout_below="@+id/ratingBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:textColor="#ffffff"
         />
 
@@ -55,10 +57,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:layout_below="@+id/textView21"
-        android:layout_alignStart="@+id/ratingBar"
-        android:layout_alignEnd="@+id/ratingBar"
 
-        />
+        android:background="#7dffffff"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/ratingListView" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -66,6 +68,8 @@
         android:id="@+id/ratingListView"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="40dp"
+        android:background="#7dffffff"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

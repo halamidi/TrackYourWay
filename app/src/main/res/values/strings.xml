@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">TrackYourWay</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_maps">Map</string>
     <string name="mapBtn">straight to maps (just a test btn)</string>
     <string name="searchBtn">Search for course</string>

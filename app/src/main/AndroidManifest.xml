@@ -59,25 +59,15 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".RegisterActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".Results_Activity" />
-        <activity android:name=".MainHub_Activity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Comments_Rating_Activity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".MainHub_Activity" />
+        <activity android:name=".Comments_Rating_Activity" />
         <activity android:name=".College_Info_Activity" />
-        <activity android:name=".Saved_Results_Activity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Saved_Results_Activity" />
         <activity android:name=".Calendar_Activity"></activity>
        <!-- <activity android:name=".Saved_Results_Activity"/> -->
-        <activity android:name=".SearchFragment"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".SearchFragment">
 
         </activity>
     </application>

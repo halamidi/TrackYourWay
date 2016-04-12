@@ -18,8 +18,7 @@
         android:id="@+id/txtCollegeNameHeading"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        android:layout_marginTop="50dp" />
+        android:textColor="#ffffff" />
 
     <CalendarView
         android:layout_width="wrap_content"

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Comments_Rating_Activity extends AppCompatActivity implements Navig
     DrawerLayout mdrawer;
     NavigationView mNavigationView;
     Toolbar toolbar;
-
+    RatingBar bar;
 
     private List<Ratings> myRatings = new ArrayList<Ratings>();
 

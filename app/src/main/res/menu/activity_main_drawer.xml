@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_new_search"
+
+            android:title="New Search" />
+        <item
+            android:id="@+id/nav_saved_searches"
+
+            android:title="Saved Searches" />
+        <item
+            android:id="@+id/nav_forum"
+
+            android:title="Forum" />
+    </group>
+
+    <item android:title="Details">
+        <menu>
+            <item
+                android:id="@+id/nav_user_details"
+
+                android:title="My details" />
+
+        </menu>
+    </item>
+
+</menu>
